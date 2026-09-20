@@ -28,3 +28,6 @@ def enviar():
 if __name__ == "__main__":
     sacar_foto()
     enviar()
+
+page.goto(URL, wait_until="domcontentloaded", timeout=90000)
+page.wait_for_timeout(15000)
