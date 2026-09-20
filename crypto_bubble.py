@@ -27,7 +27,10 @@ def enviar():
     with open(FOTO, "rb") as f:
         requests.post(
             f"https://api.telegram.org/bot{TOKEN}/sendPhoto",
-            data={"chat_id": CHAT_ID, "caption": "Crypto Bubbles · 1D"},
+            data={
+                "chat_id": CHAT_ID,
+                "caption": "Actualización del mercado cripto en compresión de 1D.",
+            },
             files={"photo": f},
             timeout=60,
         ).raise_for_status()
@@ -35,3 +38,4 @@ def enviar():
 if __name__ == "__main__":
     sacar_foto()
     enviar()
+    
