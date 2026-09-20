@@ -1,0 +1,21 @@
+name: Enviar mapa Finviz
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 18 * * 1-5"
+
+jobs:
+  enviar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - run: playwright install chromium --with-deps
+      - run: python finviz_mapa.py
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
