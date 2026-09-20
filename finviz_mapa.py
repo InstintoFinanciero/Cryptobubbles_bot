@@ -14,13 +14,12 @@ def sacar_foto():
         page.goto(URL, wait_until="domcontentloaded", timeout=90000)
         page.wait_for_timeout(8000)
 
-        for texto in ("Day", "1D", "24h", "24H"):
-            boton = page.get_by_text(texto, exact=True)
-            if boton.count() > 0:
-                boton.first.click()
-                break
+        boton_1d = page.get_by_text("1D", exact=True)
+        if boton_1d.count() > 0:
+            boton_1d.first.click()
 
-        page.wait_for_timeout(5000)
+        page.keyboard.press("Escape")
+        page.wait_for_timeout(2000)
         page.screenshot(path=FOTO, full_page=False)
         browser.close()
 
