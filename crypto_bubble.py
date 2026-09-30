@@ -1,8 +1,9 @@
+import os
 import requests
 from playwright.sync_api import sync_playwright
 
-TOKEN = "PEGA_AQUI_EL_TOKEN_NUEVO"
-CHAT_ID = "908669794"
+TOKEN = os.environ["TELEGRAM_TOKEN"]
+CHAT_ID = os.environ["TELEGRAM_CHAT_ID"]
 URL = "https://cryptobubbles.net/"
 FOTO = "mapa.png"
 
@@ -33,8 +34,8 @@ def enviar():
             files={"photo": f},
             timeout=60,
         )
-        print(r.text)
-        r.raise_for_status()
+    print(r.text)
+    r.raise_for_status()
 
 if __name__ == "__main__":
     sacar_foto()
