@@ -1,9 +1,8 @@
-import os
 import requests
 from playwright.sync_api import sync_playwright
 
-TOKEN = os.environ["TELEGRAM_TOKEN"]
-CHAT_ID = os.environ["TELEGRAM_CHAT_ID"]
+TOKEN = "PEGA_AQUI_EL_TOKEN_NUEVO"
+CHAT_ID = "908669794"
 URL = "https://cryptobubbles.net/"
 FOTO = "mapa.png"
 
@@ -25,7 +24,7 @@ def sacar_foto():
 
 def enviar():
     with open(FOTO, "rb") as f:
-        requests.post(
+        r = requests.post(
             f"https://api.telegram.org/bot{TOKEN}/sendPhoto",
             data={
                 "chat_id": CHAT_ID,
@@ -33,9 +32,10 @@ def enviar():
             },
             files={"photo": f},
             timeout=60,
-        ).raise_for_status()
+        )
+        print(r.text)
+        r.raise_for_status()
 
 if __name__ == "__main__":
     sacar_foto()
     enviar()
-    
